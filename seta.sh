@@ -3,6 +3,18 @@
 sudo docker network create chiroposture_network
 sudo docker network create meylorCI
 
+# desktop
+git clone git@gitlab.com:devs176/docker-ubuntu.git
+cd docker-ubuntu
+sudo bash start.sh
+
+
+# agentstat 
+git clone git@gitlab.com:a4496/agentstat.git
+cd agentstat
+sudo bash scripts/start.sh
+cd ~
+
 # useiam services
 git clone git@gitlab.com:devs176/useiam.git
 cd ~/useiam
