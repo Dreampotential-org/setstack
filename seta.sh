@@ -4,6 +4,7 @@ sudo docker network create chiroposture_network
 sudo docker network create meylorCI
 
 # desktop
+cd ~
 git clone git@gitlab.com:devs176/docker-ubuntu.git
 cd docker-ubuntu
 sudo bash start.sh
