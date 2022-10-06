@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 sudo docker network create chiroposture_network
 sudo docker network create meylorCI
 
@@ -10,7 +12,7 @@ cd docker-ubuntu
 sudo bash start.sh
 
 
-# agentstat 
+# agentstat
 git clone git@gitlab.com:a4496/agentstat.git
 cd agentstat
 sudo bash scripts/start.sh
