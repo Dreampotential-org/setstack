@@ -2,6 +2,9 @@
 
 set -x
 
+
+ssh-add ben
+
 sudo docker network create chiroposture_network
 sudo docker network create meylorCI
 
