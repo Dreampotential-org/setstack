@@ -39,15 +39,20 @@ cd ~
 
 
 # useiam services
-# git clone git@gitlab.com:devs176/useiam.git
-# cd ~/useiam
-# sudo ./scripts/start-prod.sh
-# cd ~
+git clone git@github.com:Dreampotential-org/useiam.git
+cd ~/useiam
+sudo ./scripts/start-prod.sh
+cd ~
 
-# git clone git@gitlab.com:devs176/useiam-server.git
-# cd ~/useiam-server
-# sudo ./scripts/start.sh
-# cd ~
+git clone  git@github.com:Dreampotential-org/useiam-site.git
+cd ~/useiam-site
+sudo bash start.sh
+
+git clone git@github.com:Dreampotential-org/useiam-server.git
+cd ~/useiam-server
+sudo ./scripts/start.sh
+sudo scripts/local_db.s
+cd ~
 
 git clone git@github.com:Dreampotential-org/python-base
 cd ~/python-base
@@ -61,7 +66,7 @@ sudo ./scripts/start.sh
 sudo ./scripts/start-pg-bouncer.sh
 sudo ./scripts/start-db.sh
 sudo cp -r etc-letsencrypt/ /etc/letsencrypt/
-sudo cp -r conf.d/ /etc/nginx/conf.d/jj@jj-HP-Laptop-15-dy2xxx
+sudo cp -r conf.d/ /etc/nginx/conf.d/
 # start-es.sh
 cd ~
 
@@ -76,9 +81,8 @@ cd ~/teacher-ui/
 sudo bash start.sh
 cd ~
 
-
 git clone git@github.com:Dreampotential-org/dreampotential-site
-cd ~/teacher-ui/
+cd ~/dreampotential-site/
 sudo bash start.sh
 cd ~
 
