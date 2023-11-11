@@ -2,104 +2,79 @@
 
 set -x
 
-
+eval `ssh-agent`
 ssh-add ben
 
 sudo docker network create chiroposture_network
 sudo docker network create meylorCI
 
+setup_nginx() {
+	sudo apt-get install nginx
+	sudo cp -r etc-letsencrypt/ /etc/letsencrypt/
+	sudo cp -r conf.d/ /etc/nginx/conf.d/
+}
 
-cd ~
-git clone git@github.com:Dreampotential-org/meylordrive
-cd ~/meylordrive
+git_clone_and_cd() {
+	PROJECT_DIR=/data/dreampotential
+	mkdir -p $PROJECT_DIR
+	cd $PROJECT_DIR
+
+	if [ ! -d $2 ]
+	then
+	    git clone $1 $2
+	    cd $2
+	else
+	    cd $2
+	    git pull
+	fi
+
+}
+
+git_clone_and_cd 'git@github.com:Dreampotential-org/meylordrive' 'meylordrive'
 sudo ./scripts/start.sh
 sudo ./scripts/local_db.sh
-cd ~
 
-# postvideo
-git clone git@github.com:Dreampotential-org/postvideo
-cd postvideo
+git_clone_and_cd 'git@github.com:Dreampotential-org/postvideo' 'postvideo'
 sudo bash start.sh
-cd ~
 
-
-# agentstat
-git clone git@github.com:Dreampotential-org/agentstat
-cd agentstat
+git_clone_and_cd 'git@github.com:Dreampotential-org/agentstat' 'agentstat'
 sudo bash scripts/start.sh
-cd ~
 
-# agentstat-svelte
-git clone git@github.com:Dreampotential-org/agentstat-svelte
-cd agentstat-svelte
+git_clone_and_cd 'git@github.com:Dreampotential-org/agentstat-svelte' 'agentstat-svelte'
 sudo bash scripts/start.sh
-cd ~
 
-
-
-
-# useiam services
-git clone git@github.com:Dreampotential-org/useiam.git
-cd ~/useiam
+git_clone_and_cd 'git@github.com:Dreampotential-org/useiam' 'useiam'
 sudo ./scripts/start-prod.sh
-cd ~
 
-git clone  git@github.com:Dreampotential-org/useiam-site.git
-cd ~/useiam-site
+git_clone_and_cd 'git@github.com:Dreampotential-org/useiam-site' 'useiam-site'
 sudo bash start.sh
 
-git clone git@github.com:Dreampotential-org/useiam-server.git
-cd ~/useiam-server
+git_clone_and_cd 'git@github.com:Dreampotential-org/useiam-server' 'useiam-server'
 sudo ./scripts/start.sh
-sudo scripts/local_db.s
-cd ~
+sudo scripts/local_db.sh
 
-git clone git@github.com:Dreampotential-org/python-base
-cd ~/python-base
+git_clone_and_cd 'git@github.com:Dreampotential-org/python-base' 'python-base'
 sudo ./scripts/local_db.sh
-cd ~
+sudo ./scripts/start.sh
 
-git clone git@gitlab.com:a4496/django-zillow.git
-cd ~/django-zillow
-sudo apt-get install nginx
+git_clone_and_cd "git@gitlab.com:a4496/django-zillow.git" "django-zillow"
 sudo ./scripts/start.sh
 sudo ./scripts/start-pg-bouncer.sh
 sudo ./scripts/start-db.sh
-sudo cp -r etc-letsencrypt/ /etc/letsencrypt/
-sudo cp -r conf.d/ /etc/nginx/conf.d/
-# start-es.sh
-cd ~
+bash  start-es.sh
 
-
-git clone git@github.com:Dreampotential-org/teacher-ui
-cd ~/teacher-ui/
+git_clone_and_cd "git@github.com:Dreampotential-org/teacher-ui" "teacher-ui"
 sudo ./scripts/start.sh
-cd ~
 
-git clone git@github.com:Dreampotential-org/teacher-ui-react
-cd ~/teacher-ui/
+
+git_clone_and_cd "git@github.com:Dreampotential-org/teacher-ui-react" "teacher-ui-react"
 sudo bash start.sh
-cd ~
 
-git clone git@github.com:Dreampotential-org/dreampotential-site
-cd ~/dreampotential-site/
+git_clone_and_cd "git@github.com:Dreampotential-org/dreampotential-site" "dreampotential-site"
 sudo bash start.sh
-cd ~
 
-git clone git@github.com:Dreampotential-org/socket-link
-cd ~/socket-link/
+git_clone_and_cd "git@github.com:Dreampotential-org/socket-link" "socket-link"
 sudo docker-compose -f docker-compose.yml up -d
-cd ~
 
-
-git clone git@github.com:Dreampotential-org/docker-jitsi
-cd ~/docker-jitsi
+git_clone_and_cd "git@github.com:Dreampotential-org/docker-jitsi" "docker-jitsi"
 sudo bash start.sh
-cd ~
-
-
-
-
-
-
-
