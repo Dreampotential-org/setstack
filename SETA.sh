@@ -3,10 +3,27 @@
 set -x
 
 eval `ssh-agent`
+chmod 600 ben
 ssh-add ben
 
-sudo docker network create chiroposture_network
-sudo docker network create meylorCI
+
+
+
+
+do_mac_install() {
+
+	if [[ "$(uname)" == "Darwin" ]]; then
+
+	# install homebrew
+	export HOMEBREW_NO_INSTALL_FROM_API=1
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+	# Install Cask
+	brew install caskroom/cask/brew-cask
+	# Install docker toolbox
+	brew cask install docker-toolbox
+	fi 
+}
 
 setup_nginx() {
 	sudo apt-get install nginx
@@ -30,6 +47,12 @@ git_clone_and_cd() {
 
 }
 
+do_mac_install
+do_linux_install
+
+sudo docker network create chiroposture_network
+sudo docker network create meylorCI
+exit
 git_clone_and_cd 'git@github.com:Dreampotential-org/meylordrive' 'meylordrive'
 sudo ./scripts/start.sh
 sudo ./scripts/local_db.sh
