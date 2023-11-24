@@ -1,14 +1,17 @@
 #!/bin/bash
 
+PROJECT_DIR=/data/vnc-data
 set -x
 
-eval `ssh-agent`
-chmod 600 ben
-ssh-add ben
+do_linux_install() {
+	sudo apt-get -y install htop vim docker docker-compose
+}
 
-
-
-
+setup_ssh() {
+	eval `ssh-agent`
+	chmod 600 ben
+	ssh-add ben
+}
 
 do_mac_install() {
 
@@ -32,7 +35,6 @@ setup_nginx() {
 }
 
 git_clone_and_cd() {
-	PROJECT_DIR=/data/dreampotential
 	mkdir -p $PROJECT_DIR
 	cd $PROJECT_DIR
 
@@ -47,12 +49,17 @@ git_clone_and_cd() {
 
 }
 
+setup_ssh
 do_mac_install
 do_linux_install
 
 sudo docker network create chiroposture_network
 sudo docker network create meylorCI
-exit
+
+
+git_clone_and_cd 'git@github.com:Dreampotential-org/chatai' 'chatai'
+sudo docker-compose -f docker-compose.yml up -d
+
 git_clone_and_cd 'git@github.com:Dreampotential-org/meylordrive' 'meylordrive'
 sudo ./scripts/start.sh
 sudo ./scripts/local_db.sh
@@ -88,7 +95,6 @@ bash  start-es.sh
 
 git_clone_and_cd "git@github.com:Dreampotential-org/teacher-ui" "teacher-ui"
 sudo ./scripts/start.sh
-
 
 git_clone_and_cd "git@github.com:Dreampotential-org/teacher-ui-react" "teacher-ui-react"
 sudo bash start.sh
