@@ -1,31 +1,37 @@
 #!/bin/bash
 
-PROJECT_DIR=/data/vnc-data
+PROJECT_DIR=/data/dreampotential
 set -x
 
 do_linux_install() {
-	sudo apt-get -y install htop vim docker docker-compose
+   sudo apt-get update
+	sudo apt-get -y install htop vim docker docker-compose htop nginx git python3-pip python3-virtualenv python3-certbot-apache net-tools certbot python3-certbot-nginx npm libffi-dev cmake libjpeg-dev zlib1g-dev
+
+
+   sudo usermod -aG docker $USER
 }
 
 setup_ssh() {
 	eval `ssh-agent`
 	chmod 600 ben
+	git config --global core.editor "vim"
+	git config --global user.name "Ben viP"
+	git config --global user.email "bengg2040@gmail.com"
 	ssh-add ben
 }
 
 do_mac_install() {
 
 	if [[ "$(uname)" == "Darwin" ]]; then
+			  # install homebrew
+			  export HOMEBREW_NO_INSTALL_FROM_API=1
+			  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-	# install homebrew
-	export HOMEBREW_NO_INSTALL_FROM_API=1
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-	# Install Cask
-	brew install caskroom/cask/brew-cask
-	# Install docker toolbox
-	brew cask install docker-toolbox
-	fi 
+			  # Install Cask
+			  brew install caskroom/cask/brew-cask
+			  # Install docker toolbox
+			  brew cask install docker-toolbox
+	fi
 }
 
 setup_nginx() {
@@ -105,5 +111,24 @@ sudo bash start.sh
 git_clone_and_cd "git@github.com:Dreampotential-org/socket-link" "socket-link"
 sudo docker-compose -f docker-compose.yml up -d
 
-git_clone_and_cd "git@github.com:Dreampotential-org/docker-jitsi" "docker-jitsi"
-sudo bash start.sh
+git_clone_and_cd "git@github.com:Dreampotential-org/bikerescue" "bikerescue"
+sudo ./scripts/start.sh
+
+
+# git_clone_and_cd "git@github.com:Dreampotential-org/docker-jitsi" "docker-jitsi"
+# sudo bash start.sh
+
+git_clone_and_cd "git@github.com:Dreampotential-org/actionj" "actionj"
+sudo ./scripts/start.sh
+
+
+git_clone_and_cd "git@github.com:Dreampotential-org/imap-service" "imap-service"
+sudo docker-compose -f docker-compose.yml up -d
+sudo docker-compose -f docker-compose-postgres.yml up -d
+
+git_clone_and_cd "git@github.com:Dreampotential-org/vstream" "vstream"
+sudo docker-compose -f docker-compose.yml up -d
+
+
+git_clone_and_cd "git@github.com:Dreampotential-org/agentstat-admin" "agentstat-admin"
+sudo bash ./scripts/start.sh
