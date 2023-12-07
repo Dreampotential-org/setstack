@@ -62,6 +62,8 @@ do_linux_install
 sudo docker network create chiroposture_network
 sudo docker network create meylorCI
 
+git_clone_and_cd 'git@github.com:Dreampotential-org/streamsphere' 'streamsphere'
+sudo docker-compose -f docker-compose.dev.yml up -d
 
 git_clone_and_cd 'git@github.com:Dreampotential-org/chatai' 'chatai'
 sudo docker-compose -f docker-compose.yml up -d
