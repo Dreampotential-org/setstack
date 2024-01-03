@@ -134,3 +134,6 @@ sudo docker-compose -f docker-compose.yml up -d
 
 git_clone_and_cd "git@github.com:Dreampotential-org/agentstat-admin" "agentstat-admin"
 sudo bash ./scripts/start.sh
+
+git_clone_and_cd "git@github.com:nsnw/etherpad-docker-compose.git" "epad"
+sudo docker-compose -f docker-compose.yml up -d
