@@ -62,6 +62,9 @@ do_linux_install
 sudo docker network create chiroposture_network
 sudo docker network create meylorCI
 
+git_clone_and_cd 'git@github.com:Dreampotential-org/MSARHP' 'MSARHP'
+cd codes && sudo bash start.sh
+
 git_clone_and_cd 'git@github.com:Dreampotential-org/streamsphere' 'streamsphere'
 sudo docker-compose -f docker-compose.dev.yml up -d
 
