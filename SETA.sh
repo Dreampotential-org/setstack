@@ -1,7 +1,10 @@
 #!/bin/bash
 
+cp .profile ~/.profile
+. ~/.profile
+
+set +x
 PROJECT_DIR=/data/dreampotential
-set -x
 
 do_linux_install() {
    sudo apt-get update
@@ -37,7 +40,7 @@ do_mac_install() {
 setup_nginx() {
 	sudo apt-get install nginx
 	sudo cp -r etc-letsencrypt/ /etc/letsencrypt/
-	sudo cp -r conf.d/ /etc/nginx/conf.d/
+	sudo cp -r conf.d/* /etc/nginx/conf.d/
 }
 
 git_clone_and_cd() {
