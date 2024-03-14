@@ -58,7 +58,17 @@ git_clone_and_cd() {
 
 }
 
+setupprofile() {
+		  # fix perms XXX
+		  # detech person account from script caller
+		  sudo mv /var /data/var
+		  sudo ln -s /data/var /var
+}
+
+setupprofile
 setup_ssh
+sudo mkdir /data
+
 do_mac_install
 do_linux_install
 
