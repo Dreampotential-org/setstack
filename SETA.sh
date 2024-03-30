@@ -59,6 +59,11 @@ setup_ssh
 do_mac_install
 do_linux_install
 
+# mdadm --create --verbose /dev/md0 --level=0 --raid-devices=2 /dev/sda /dev/sdb
+# mkfs.ext4 /dev/md0/
+# mkdir /data
+# chown arosen:rethinkdb-PG0 /data
+
 sudo docker network create chiroposture_network
 sudo docker network create meylorCI
 
