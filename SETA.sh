@@ -5,8 +5,7 @@ set -x
 
 do_linux_install() {
    sudo apt-get update
-	sudo apt-get -y install htop vim docker docker-compose htop nginx git python3-pip python3-virtualenv python3-certbot-apache net-tools certbot python3-certbot-nginx npm libffi-dev cmake libjpeg-dev zlib1g-dev
-
+   sudo apt-get -y install htop vim docker-compose htop nginx git python3-pip python3-virtualenv python3-certbot-apache net-tools certbot python3-certbot-nginx npm libffi-dev cmake libjpeg-dev zlib1g-dev
 
    sudo usermod -aG docker $USER
 }
@@ -55,6 +54,8 @@ git_clone_and_cd() {
 
 }
 
+sudo mkdir -p /data
+sudo chown `whoami` /data
 setup_ssh
 do_mac_install
 do_linux_install
