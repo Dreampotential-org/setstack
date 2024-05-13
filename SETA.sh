@@ -22,14 +22,14 @@ setup_ssh() {
 do_mac_install() {
 
 	if [[ "$(uname)" == "Darwin" ]]; then
-			  # install homebrew
-			  export HOMEBREW_NO_INSTALL_FROM_API=1
-			  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	  # install homebrew
+	  export HOMEBREW_NO_INSTALL_FROM_API=1
+	  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-			  # Install Cask
-			  brew install caskroom/cask/brew-cask
-			  # Install docker toolbox
-			  brew cask install docker-toolbox
+	  # Install Cask
+	  brew install caskroom/cask/brew-cask
+	  # Install docker toolbox
+	  brew cask install docker-toolbox
 	fi
 }
 
@@ -67,9 +67,6 @@ do_linux_install
 # mkdir /data
 # chown arosen:rethinkdb-PG0 /data
 
-sudo docker network create chiroposture_network
-sudo docker network create meylorCI
-
 git_clone_and_cd 'git@github.com:Dreampotential-org/MSARHP' 'MSARHP'
 cd codes && sudo bash start.sh
 
@@ -80,8 +77,8 @@ git_clone_and_cd 'git@github.com:Dreampotential-org/chatai' 'chatai'
 sudo docker-compose -f docker-compose.yml up -d
 
 git_clone_and_cd 'git@github.com:Dreampotential-org/meylordrive' 'meylordrive'
+sudo ./scripts/startdb.sh
 sudo ./scripts/start.sh
-sudo ./scripts/local_db.sh
 
 git_clone_and_cd 'git@github.com:Dreampotential-org/postvideo' 'postvideo'
 sudo bash start.sh
