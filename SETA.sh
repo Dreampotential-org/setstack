@@ -67,6 +67,10 @@ do_linux_install
 # mkdir /data
 # chown arosen:rethinkdb-PG0 /data
 
+git_clone_and_cd 'git@github.com:Dreampotential-org/dreampotential-site' 'dreampotential-site'
+cd codes && sudo bash start.sh
+
+
 git_clone_and_cd 'git@github.com:Dreampotential-org/MSARHP' 'MSARHP'
 cd codes && sudo bash start.sh
 
