@@ -4,6 +4,13 @@ PROJECT_DIR=/data/dreampotential
 set -x
 
 do_linux_install() {
+
+
+   # XXX do something to backup the persons profile 
+   cp .profile ~/.profile
+   . ~/.profile
+
+
    sudo apt-get update
    sudo apt-get -y install htop vim docker-compose htop nginx git python3-pip python3-virtualenv net-tools npm libffi-dev cmake libjpeg-dev zlib1g-dev vim wget git
 
@@ -17,6 +24,15 @@ setup_ssh() {
 	git config --global user.name "Ben viP"
 	git config --global user.email "bengg2040@gmail.com"
 	ssh-add ben
+}
+
+setupcordova() { 
+	sudo npm install -g cordova
+	wget -c https://services.gradle.org/distributions/gradle-7.4.2-bin.zip -P /tmp
+	unzip -d /opt/gradle /tmp/gradle-*.zip
+
+	# need to download android studio & manually download build-tools
+
 }
 
 do_mac_install() {
@@ -66,6 +82,15 @@ do_linux_install
 # mkfs.ext4 /dev/md0/
 # mkdir /data
 # chown arosen:rethinkdb-PG0 /data
+
+git_clone_and_cd 'git@github.com:Dreampotential-org/rtb' 'rtb'
+cd codes && sudo bash start.sh
+
+
+#git_clone_and_cd 'git@github.com:Dreampotential-org/docker-webtop' 'docker-webtop'
+# git checkout kde
+# bash start.sh
+
 
 git_clone_and_cd 'git@github.com:Dreampotential-org/Wppf' 'Wppf'
 cd codes && sudo bash start.sh
