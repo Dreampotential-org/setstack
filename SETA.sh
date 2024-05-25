@@ -102,7 +102,7 @@ git_clone_and_cd 'git@github.com:Dreampotential-org/MSARHP' 'MSARHP'
 cd codes && sudo bash start.sh
 
 git_clone_and_cd 'git@github.com:Dreampotential-org/streamsphere' 'streamsphere'
-sudo docker-compose -f docker-compose.dev.yml up -d
+sudo bash start.sh
 
 git_clone_and_cd 'git@github.com:Dreampotential-org/chatai' 'chatai'
 sudo docker-compose -f docker-compose.yml up -d
