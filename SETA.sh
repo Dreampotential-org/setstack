@@ -83,13 +83,17 @@ do_linux_install
 # mkdir /data
 # chown arosen:rethinkdb-PG0 /data
 
+ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+
+git_clone_and_cd 'git@github.com:Dreampotential-org/docker-webtop' 'docker-webtop'
+git checkout kde
+bash start.sh
+
+
+
 git_clone_and_cd 'git@github.com:Dreampotential-org/rtb' 'rtb'
 cd codes && sudo bash start.sh
-
-
-#git_clone_and_cd 'git@github.com:Dreampotential-org/docker-webtop' 'docker-webtop'
-# git checkout kde
-# bash start.sh
 
 
 git_clone_and_cd 'git@github.com:Dreampotential-org/Wppf' 'Wppf'
