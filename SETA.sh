@@ -36,10 +36,16 @@ do_mac_install() {
 	fi
 }
 
-setup_nginx() {
+setupnginx() {
 	sudo apt-get install nginx
+<<<<<<< HEAD
 	sudo cp -r etc-letsencrypt/ /etc/letsencrypt/
 	sudo cp -r conf.d/* /etc/nginx/conf.d/
+=======
+	sudo cp -r certbot/conf/* /etc/letsencrypt/
+	sudo cp -r conf.d/* /etc/nginx/conf.d/
+	service nginx restart
+>>>>>>> 3348dcb (make this f)
 }
 
 git_clone_and_cd() {
@@ -71,6 +77,7 @@ sudo chown `whoami` /data
 setup_ssh
 sudo mkdir /data
 
+setupnginx
 do_mac_install
 do_linux_install
 
